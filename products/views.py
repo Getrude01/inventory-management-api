@@ -2,6 +2,15 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .models import Product
 from .serializers import ProductSerializer
+from django.conf import settings
+from django.http import JsonResponse
+
+def show_settings(request):
+    return JsonResponse({
+        "DEBUG": settings.DEBUG,
+        "ALLOWED_HOSTS": settings.ALLOWED_HOSTS,
+    })
+
 
 class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
